@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#FFF159">
+<title>CAD DINO | Painel diário da operação</title>
+<style>
+:root{color-scheme:light;--yellow:#FFF159;--blue:#3483FA;--ink:#30343B;--muted:#737983;--line:#E7E9ED;--paper:#FFF;--wash:#F5F6F8;--green:#178A4B;--red:#D64545;--gold:#E8B923;--silver:#AEB6C1;--bronze:#B97745}
+*{box-sizing:border-box}
+html{min-width:320px;background:var(--wash)}
+body{margin:0;color:var(--ink);font-family:Inter,Arial,Helvetica,sans-serif;background:linear-gradient(180deg,#FFFBE0 0,#F7F8FA 230px,#F5F6F8 100%);min-height:100vh}
+.topbar{height:76px;background:var(--yellow);display:flex;align-items:center;justify-content:space-between;padding:0 clamp(18px,4vw,58px);box-shadow:0 2px 10px #00000012}
+.brand{display:flex;align-items:center;gap:14px;font-size:clamp(21px,2vw,28px);font-weight:850;letter-spacing:-.04em}
+.brand-mark{width:38px;height:38px;display:grid;place-items:center;border-radius:50%;background:#fff;border:3px solid #263238;color:var(--blue);font-weight:900;font-size:21px}
+.brand-mark span{transform:scaleX(1.15)}
+.top-meta{text-align:right}
+.kicker{font-size:11px;letter-spacing:.16em;font-weight:800;color:#4D5158}
+.updated{font-size:12px;color:#50545B;margin-top:4px}
+main{width:min(1440px,100%);margin:auto;padding:clamp(18px,3vw,38px) clamp(16px,3.5vw,50px) 42px}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:22px}
+.kpi{background:var(--paper);border:1px solid #EAECF0;border-radius:16px;padding:17px 19px 16px;box-shadow:0 7px 20px #18223008;min-height:132px;display:flex;flex-direction:column;justify-content:space-between}
+.kpi-label{font-size:12px;font-weight:800;letter-spacing:.11em;color:#696F77}
+.kpi-main{display:flex;align-items:baseline;gap:7px;margin:8px 0 5px;flex-wrap:wrap}
+.kpi-value{font-size:clamp(27px,3vw,39px);font-weight:850;letter-spacing:-.055em;line-height:1}
+.kpi-unit{font-size:13px;color:var(--muted);font-weight:650}
+.kpi-target{font-size:12px;color:var(--muted)}
+.kpi-status{font-size:12px;font-weight:750;margin-top:8px}
+.kpi-status.above{color:var(--green)}
+.kpi-status.below{color:var(--red)}
+.kpi-status.empty{color:#777E88}
+.process-panel{background:var(--paper);border:1px solid #E9EBEF;border-radius:22px;box-shadow:0 12px 32px #1822300D;overflow:hidden}
+.panel-head{padding:24px clamp(18px,3vw,38px) 18px;border-bottom:1px solid var(--line)}
+.panel-topline{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.eyebrow{font-size:11px;letter-spacing:.15em;font-weight:850;color:#767C85}
+.slide-count{font-size:12px;color:var(--muted);font-weight:700;font-variant-numeric:tabular-nums}
+.process-title-row{display:flex;align-items:center;gap:14px;margin-top:13px;min-width:0}
+.process-icon{width:54px;height:54px;flex:0 0 54px;border-radius:16px;background:#EEF4FF;color:var(--blue);display:grid;place-items:center;font-size:28px}
+.process-title{font-size:clamp(22px,3vw,34px);line-height:1.08;letter-spacing:-.035em;margin:0;font-weight:850;overflow-wrap:anywhere}
+.navigation{display:grid;grid-template-columns:44px 1fr 44px;align-items:center;gap:12px;margin-top:17px}
+.nav-btn{height:40px;width:44px;border:1px solid #DDE1E7;border-radius:12px;background:white;color:#333A44;font-size:18px;font-weight:800;cursor:pointer;transition:background .15s,border-color .15s,transform .15s}
+.nav-btn:hover{background:#F1F6FF;border-color:#AFC9FC;transform:translateY(-1px)}
+.nav-btn:focus-visible,.dot:focus-visible{outline:3px solid #3483FA66;outline-offset:2px}
+.dots{display:flex;justify-content:center;gap:7px;flex-wrap:wrap}
+.dot{border:0;width:11px;height:11px;padding:0;border-radius:20px;background:#D7DBE2;cursor:pointer;transition:width .2s,background .2s}
+.dot[aria-current="true"]{width:30px;background:var(--blue)}
+.panel-body{padding:24px clamp(18px,3vw,38px) 32px}
+.section-title{font-size:12px;letter-spacing:.14em;font-weight:850;color:#777D85;margin:0 0 17px;text-align:center}
+.podium{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,235px),1fr));gap:14px;align-items:end;max-width:1030px;margin:0 auto}
+.podium-card{background:#fff;border:1px solid var(--line);border-radius:18px;min-height:194px;padding:18px 16px 21px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;box-shadow:0 8px 22px #18223008;min-width:0}
+.podium-card.rank-1{min-height:226px;border-color:#F1D369;background:linear-gradient(180deg,#FFFBE7,#fff 58%)}
+.medal{width:47px;height:47px;border-radius:50%;display:grid;place-items:center;font-size:24px;margin-bottom:10px;border:3px solid #fff;box-shadow:0 2px 8px #00000018}
+.rank-1 .medal{background:#F9E7A4;color:#876405}
+.rank-2 .medal{background:#E5E9EF;color:#596574}
+.rank-3 .medal{background:#F0D7C7;color:#80502D}
+.rank-label{font-size:12px;font-weight:850;letter-spacing:.1em;color:#6B717A;margin-bottom:8px}
+.rank-1 .rank-label{color:#866607}
+.person-name{font-size:clamp(14px,1.5vw,17px);font-weight:800;line-height:1.28;overflow-wrap:anywhere;max-width:100%}
+.person-rate{font-size:clamp(20px,2vw,25px);font-weight:850;color:#30343B;margin-top:8px;font-variant-numeric:tabular-nums;letter-spacing:-.035em}
+.next-section{max-width:1030px;margin:28px auto 0}
+.next-title{font-size:11px;font-weight:850;letter-spacing:.12em;color:#7A8088;margin:0 0 10px}
+.next-list{display:grid;gap:7px}
+.next-row{display:grid;grid-template-columns:42px minmax(0,1fr) auto;align-items:center;gap:12px;min-height:48px;padding:8px 13px;border-radius:12px;background:#F7F8FA;border:1px solid #ECEEF2}
+.next-rank{font-size:12px;font-weight:850;color:#7A8088;font-variant-numeric:tabular-nums}
+.next-name{font-size:14px;font-weight:730;line-height:1.25;overflow-wrap:anywhere}
+.next-rate{font-size:15px;font-weight:850;color:#30343B;white-space:nowrap;font-variant-numeric:tabular-nums}
+.empty-state{max-width:760px;margin:0 auto;padding:32px 18px;border-radius:16px;background:#F7F8FA;border:1px dashed #D9DDE3;color:#686F79;text-align:center;font-weight:750}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(max-width:780px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.kpi{min-height:120px;padding:14px}.panel-head{padding-top:19px}.panel-body{padding-top:19px}.podium{grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr))}}
+@media(max-width:480px){.topbar{height:68px;padding-inline:14px}.brand{gap:9px;font-size:19px}.brand-mark{width:32px;height:32px;font-size:18px}.kicker{font-size:9px}.updated{font-size:10px}.kpi{min-height:112px;padding:12px;border-radius:13px}.kpi-label{font-size:10px}.kpi-target,.kpi-status{font-size:11px}.process-panel{border-radius:17px}.process-icon{width:46px;height:46px;flex-basis:46px;border-radius:14px;font-size:25px}.navigation{grid-template-columns:40px 1fr 40px;gap:8px}.nav-btn{width:40px}.podium{grid-template-columns:1fr}.podium-card,.podium-card.rank-1{min-height:0;padding:16px}.next-row{grid-template-columns:34px minmax(0,1fr) auto;gap:8px;padding-inline:10px}.next-name{font-size:13px}.next-rate{font-size:14px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><div class="brand-mark" aria-hidden="true"><span>M</span></div><span>CAD DINO</span></div>
+  <div class="top-meta"><div class="kicker">PAINEL DIÁRIO DA OPERAÇÃO</div><div class="updated" id="updatedAt"></div></div>
+</header>
+<main>
+  <section class="kpis" id="kpis" aria-label="Indicadores fixos"></section>
+  <section class="process-panel" aria-label="Ranking diário por processo">
+    <div class="panel-head">
+      <div class="panel-topline"><span class="eyebrow">PROCESSO DO DIA</span><span class="slide-count" id="slideCount">01 / 08</span></div>
+      <div class="process-title-row"><div class="process-icon" id="processIcon" aria-hidden="true"></div><h1 class="process-title" id="processTitle"></h1></div>
+      <nav class="navigation" aria-label="Navegação dos processos">
+        <button class="nav-btn" id="prevBtn" type="button" aria-label="Processo anterior">‹</button>
+        <div class="dots" id="dots"></div>
+        <button class="nav-btn" id="nextBtn" type="button" aria-label="Próximo processo">›</button>
+      </nav>
+    </div>
+    <div class="panel-body">
+      <h2 class="section-title">PÓDIO DO DIA</h2>
+      <div class="podium" id="podium" aria-live="polite"></div>
+      <section class="next-section" id="nextSection">
+        <h3 class="next-title">PRÓXIMOS ATÉ 7</h3>
+        <div class="next-list" id="nextList"></div>
+      </section>
+    </div>
+  </section>
+</main>
+<script>
+const kpis=[
+ {label:"GNP",value:"30,07",target:"30",state:"above",status:"↑ 100,2% da meta"},
+ {label:"OUT",value:"42,32",target:"40",state:"above",status:"↑ 105,8% da meta"},
+ {label:"IN",value:"155,06",target:"150",state:"above",status:"↑ 103,4% da meta"},
+ {label:"ICQA",value:null,target:"200",state:"empty",status:"Sem dados de hoje"}
+];
+const slides=[
+ {label:"Expedição",icon:"🚚",rows:[
+  {name:"THAIS MARIANA DA SILVA",rate:333.33},
+  {name:"JANAINA FRANCO DE OLIVEIRA",rate:43.48}
+ ]},
+ {label:"Shipping",icon:"📦",rows:[
+  {name:"THAINARA SANTIAGO LOPES",rate:966.67},
+  {name:"EVERTON DA SILVA ALVES",rate:862.98},
+  {name:"JANAINA FRANCO DE OLIVEIRA",rate:772.04},
+  {name:"THAIS MARIANA DA SILVA",rate:723.65},
+  {name:"MARIO FELIPE DOS SANTOS MELO",rate:631.67}
+ ]},
+ {label:"Open Transfer",icon:"↗",rows:[]},
+ {label:"Put Away",icon:"📥",rows:[
+  {name:"NATHAN DA SILVA LEDES DOS SANTOS",rate:398.06},
+  {name:"STEFANY DE LOS ANGELES BRICENO",rate:362.46},
+  {name:"JONATHAN LUIS DOS SANTOS",rate:317.52},
+  {name:"ELIEZER RODRIGUES DOS SANTOS",rate:264.88},
+  {name:"GERALDO DIAS LIMA",rate:261.65},
+  {name:"ELAINE CRISTINA DOS SANTOS PEREIRA",rate:260.91},
+  {name:"MATEUS DE SOUZA PALMEIRA",rate:236.98},
+  {name:"ELAINE CRISTINA LEMOS MORAIS",rate:215.69},
+  {name:"JOAO PAULO DA SILVA CAETANO",rate:213.09},
+  {name:"ALESSANDRA SANDE FERREIRA DOS SANTOS",rate:210.39}
+ ]},
+ {label:"Packing",icon:"🧰",rows:[
+  {name:"ANGEL MOURA LEITE",rate:307.48},
+  {name:"LUCIANA PEREIRA DE FARIAS",rate:262.97},
+  {name:"KAROLAYNE DA SILVA FERREIRA",rate:253.76},
+  {name:"ERICA CRISTINA DA SILVA MENEGUELLO",rate:236.57},
+  {name:"GABRIELA CABRAL DE ARAUJO",rate:232.61},
+  {name:"GABRIELE FERNANDES DE OLIVEIRA",rate:230.22},
+  {name:"LUCIANA CRISTINA DE OLIVEIRA SANTOS",rate:224.49},
+  {name:"BRUNA RAFAELA DOS SANTOS",rate:208.71},
+  {name:"ELIZANDRA ALINE FANTIN",rate:197.06},
+  {name:"FERNANDA VITORIA PEREIRA SANTOS",rate:166.96}
+ ]},
+ {label:"Picking",icon:"🛒",rows:[
+  {name:"ERICA CRISTINA DA SILVA MENEGUELLO",rate:166.78},
+  {name:"STEFANY DE LOS ANGELES BRICENO",rate:145.51},
+  {name:"KAROLAYNE DA SILVA FERREIRA",rate:144.72},
+  {name:"ELAINE CRISTINA DOS SANTOS PEREIRA",rate:137.61},
+  {name:"LUCIANA CRISTINA DE OLIVEIRA SANTOS",rate:135.67},
+  {name:"HELOISE OLIVEIRA MARQUES",rate:134.88},
+  {name:"ANDREAS GUERT DE LIMA",rate:126.97},
+  {name:"JANAINA FRANCO DE OLIVEIRA",rate:125.00},
+  {name:"LUCIANA PEREIRA DE FARIAS",rate:117.25},
+  {name:"GERALDO DIAS LIMA",rate:117.12}
+ ]},
+ {label:"Putwallin",icon:"🧱",rows:[
+  {name:"VICTOR FERNANDO DE SOUZA MUNK",rate:288.17},
+  {name:"ERICA CRISTINA DA SILVA MENEGUELLO",rate:243.90},
+  {name:"LUCIANA PEREIRA DE FARIAS",rate:65.79}
+ ]},
+ {label:"ICQA",icon:"🔎",rows:[]}
+];
+const captureLabel="12/11/2026 · 10:42:31 BRT";
+document.getElementById("updatedAt").textContent="Atualizado em "+captureLabel;
+const numberFormat=new Intl.NumberFormat("pt-BR",{minimumFractionDigits:2,maximumFractionDigits:2});
+const kpiRoot=document.getElementById("kpis");
+kpiRoot.innerHTML=kpis.map(function(item){
+ const statusClass=item.state;
+ const value=item.value===null?"—":item.value;
+ return '<article class="kpi"><div><div class="kpi-label">'+item.label+'</div><div class="kpi-main"><span class="kpi-value">'+value+'</span><span class="kpi-unit">u/h</span></div><div class="kpi-target">Meta: '+item.target+' u/h</div></div><div class="kpi-status '+statusClass+'">'+item.status+'</div></article>';
+}).join("");
+let current=0;
+let timer=null;
+const dotsRoot=document.getElementById("dots");
+dotsRoot.innerHTML=slides.map(function(s,i){return '<button class="dot" type="button" aria-label="Mostrar '+s.label+'" data-slide="'+i+'"></button>';}).join("");
+function podiumCard(person,index){
+ const rank=index+1;
+ const medals=["🥇","🥈","🥉"];
+ const suffix=["1º","2º","3º"];
+ return '<article class="podium-card rank-'+rank+'"><div class="medal" role="img" aria-label="Medalha de '+["ouro","prata","bronze"][index]+'">'+medals[index]+'</div><div class="rank-label">'+suffix[index]+' LUGAR</div><div class="person-name">'+person.name+'</div><div class="person-rate">'+numberFormat.format(person.rate)+' u/h</div></article>';
+}
+function renderSlide(index){
+ current=(index+slides.length)%slides.length;
+ const slide=slides[current];
+ document.getElementById("processIcon").textContent=slide.icon;
+ document.getElementById("processTitle").textContent=slide.label;
+ document.getElementById("slideCount").textContent=String(current+1).padStart(2,"0")+" / "+String(slides.length).padStart(2,"0");
+ dotsRoot.querySelectorAll(".dot").forEach(function(dot,i){dot.setAttribute("aria-current",i===current?"true":"false");});
+ const top=slide.rows.slice(0,3);
+ const podium=document.getElementById("podium");
+ const nextSection=document.getElementById("nextSection");
+ const nextList=document.getElementById("nextList");
+ if(!slide.rows.length){
+  podium.innerHTML='<div class="empty-state">Sem dados de hoje</div>';
+  nextSection.hidden=true;
+ }else{
+  podium.innerHTML=top.map(podiumCard).join("");
+  const remaining=slide.rows.slice(3,10);
+  nextSection.hidden=remaining.length===0;
+  nextList.innerHTML=remaining.map(function(person,i){
+   return '<div class="next-row"><span class="next-rank">'+String(i+4).padStart(2,"0")+'</span><span class="next-name">'+person.name+'</span><span class="next-rate">'+numberFormat.format(person.rate)+' u/h</span></div>';
+  }).join("");
+ }
+}
+function startRotation(){
+ if(timer)window.clearInterval(timer);
+ timer=window.setInterval(function(){renderSlide(current+1);},5000);
+}
+document.getElementById("prevBtn").addEventListener("click",function(){renderSlide(current-1);startRotation();});
+document.getElementById("nextBtn").addEventListener("click",function(){renderSlide(current+1);startRotation();});
+dotsRoot.addEventListener("click",function(event){
+ const button=event.target.closest("button[data-slide]");
+ if(!button)return;
+ renderSlide(Number(button.dataset.slide));startRotation();
+});
+document.addEventListener("visibilitychange",function(){if(document.hidden){if(timer)window.clearInterval(timer);timer=null;}else{startRotation();}});
+renderSlide(0);startRotation();
+</script>
+</body>
+</html>
+
+
