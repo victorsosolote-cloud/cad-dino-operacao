@@ -214,6 +214,7 @@ const slides=[
  ]},
  {label:"ICQA",icon:"🔎",rows:[{name:"TAMIRES DOMINGOS PEREIRA",rate:245.50},{name:"LUARA RAISSA RAMALHO",rate:150.02},{name:"LUCIENE DE JESUS PEIXOTO",rate:128.16}]}
 ];
+const visibleSlides=slides.filter(function(s){return s.label==="ICQA"||s.rows.length>0;});
 const processIcons={
  "Expedição":'<svg viewBox="0 0 64 64" aria-hidden="true"><path d="M6 21 26 10l20 11-20 11L6 21Z" fill="#FFF159" stroke="currentColor" stroke-width="3" stroke-linejoin="round"></path><path d="M6 21v25l20 11V32m0 25 20-11V21M36 14h16v24m0 0-7-7m7 7 7-7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path><path d="M16 41h7" stroke="#3483FA" stroke-width="3" stroke-linecap="round"></path></svg>',
  "Shipping":'<svg viewBox="0 0 64 64" aria-hidden="true"><path d="M8 22 32 9l24 13-24 13L8 22Z" fill="#FFF159" stroke="currentColor" stroke-width="3" stroke-linejoin="round"></path><path d="M8 22v25l24 13 24-13V22M32 35v25M20 16l24 13v13" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"></path><path d="M16 44h10m12 0h10" stroke="currentColor" stroke-width="3" stroke-linecap="round"></path></svg>',
@@ -240,7 +241,7 @@ kpiRoot.innerHTML=kpis.map(function(item){
 let current=0;
 let timer=null;
 const dotsRoot=document.getElementById("slideDots");
-dotsRoot.innerHTML=slides.map(function(s,i){return '<button class="slide-dot" type="button" aria-label="Mostrar '+s.label+'" data-slide="'+i+'"></button>';}).join("");
+dotsRoot.innerHTML=visibleSlides.map(function(s,i){return '<button class="slide-dot" type="button" aria-label="Mostrar '+s.label+'" data-slide="'+i+'"></button>';}).join("");
 function medalSvg(index){
  const classes=["gold","silver","bronze"];
  const labels=["ouro","prata","bronze"];
@@ -252,11 +253,11 @@ function podiumCard(person,index){
  return '<article class="podium-item rank-'+rank+'"><div class="rank-block"><div class="podium-rank">'+rankText[index]+'</div>'+medalSvg(index)+'</div><div class="rep-label" title="'+person.name+'">'+person.name+'</div><div class="rep-value status-neutral">'+numberFormat.format(person.rate)+' u/h</div></article>';
 }
 function renderSlide(index){
- current=(index+slides.length)%slides.length;
- const slide=slides[current];
+ current=(index+visibleSlides.length)%visibleSlides.length;
+ const slide=visibleSlides[current];
  document.getElementById("processIcon").innerHTML=processIcons[slide.label]||"";
  document.getElementById("processTitle").textContent=slide.label;
- document.getElementById("slideCount").textContent=String(current+1).padStart(2,"0")+" / "+String(slides.length).padStart(2,"0");
+ document.getElementById("slideCount").textContent=String(current+1).padStart(2,"0")+" / "+String(visibleSlides.length).padStart(2,"0");
  dotsRoot.querySelectorAll(".slide-dot").forEach(function(dot,i){dot.setAttribute("aria-current",i===current?"true":"false");});
  const top=slide.rows.slice(0,3);
  const remaining=slide.rows.slice(3,10);
