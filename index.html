@@ -90,7 +90,7 @@ header:after{content:"";position:absolute;right:0;bottom:0;width:30%;height:2px;
 .rep-value{display:block;min-width:0;margin:0;font-size:clamp(19px,1.45vw,29px);font-weight:950;line-height:1.05;white-space:nowrap;text-align:center;font-variant-numeric:tabular-nums;color:var(--blue)}
 .podium-item.rank-1 .rep-value{color:#a47b00}
 .podium-item.rank-2 .rep-value{color:#737d87}
-.podium-item.rank-3 .rep-value{color:#985d35}
+.podium-item.rank-3 .rep-value{color:#985d35}.podium-item .rep-value.status-neutral,.following .rep-value.status-neutral{color:var(--blue)!important}
 .content.podium-only{grid-template-columns:minmax(120px,.42fr) minmax(0,1.7fr) minmax(0,.4fr)}
 .content.podium-only .following{display:none}
 .content.podium-only .podium-area{grid-column:2/4}
@@ -249,7 +249,7 @@ function medalSvg(index){
 function podiumCard(person,index){
  const rank=index+1;
  const rankText=["1º","2º","3º"];
- return '<article class="podium-item rank-'+rank+'"><div class="rank-block"><div class="podium-rank">'+rankText[index]+'</div>'+medalSvg(index)+'</div><div class="rep-label" title="'+person.name+'">'+person.name+'</div><div class="rep-value">'+numberFormat.format(person.rate)+' u/h</div></article>';
+ return '<article class="podium-item rank-'+rank+'"><div class="rank-block"><div class="podium-rank">'+rankText[index]+'</div>'+medalSvg(index)+'</div><div class="rep-label" title="'+person.name+'">'+person.name+'</div><div class="rep-value status-neutral">'+numberFormat.format(person.rate)+' u/h</div></article>';
 }
 function renderSlide(index){
  current=(index+slides.length)%slides.length;
@@ -278,7 +278,7 @@ function renderSlide(index){
   nextList.style.setProperty("--remaining-count",String(Math.max(1,remaining.length)));
   nextList.innerHTML=remaining.map(function(person,i){
    const width=Math.max(0,Math.min(100,person.rate/maxRate*100));
-   return '<div class="follow-row"><span class="position">'+String(i+4).padStart(2,"0")+'</span><span class="rep-label" title="'+person.name+'">'+person.name+'</span><div class="follow-track" aria-hidden="true"><span style="width:'+width.toFixed(1)+'%"></span></div><span class="rep-value">'+numberFormat.format(person.rate)+' u/h</span></div>';
+   return '<div class="follow-row"><span class="position">'+String(i+4).padStart(2,"0")+'</span><span class="rep-label" title="'+person.name+'">'+person.name+'</span><div class="follow-track" aria-hidden="true"><span style="width:'+width.toFixed(1)+'%"></span></div><span class="rep-value status-neutral">'+numberFormat.format(person.rate)+' u/h</span></div>';
   }).join("");
  }
 }
