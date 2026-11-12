@@ -90,7 +90,7 @@ header:after{content:"";position:absolute;right:0;bottom:0;width:30%;height:2px;
 .rep-value{display:block;min-width:0;margin:0;font-size:clamp(19px,1.45vw,29px);font-weight:950;line-height:1.05;white-space:nowrap;text-align:center;font-variant-numeric:tabular-nums;color:var(--blue)}
 .podium-item.rank-1 .rep-value{color:#a47b00}
 .podium-item.rank-2 .rep-value{color:#737d87}
-.podium-item.rank-3 .rep-value{color:#985d35}.podium-item .rep-value.status-neutral,.following .rep-value.status-neutral{color:var(--blue)!important}
+.podium-item.rank-3 .rep-value{color:#985d35}.podium-item .rep-value.status-good,.following .rep-value.status-good{color:var(--green)!important}.podium-item .rep-value.status-bad,.following .rep-value.status-bad{color:var(--red)!important}
 .content.podium-only{grid-template-columns:minmax(120px,.42fr) minmax(0,1.7fr) minmax(0,.4fr)}
 .content.podium-only .following{display:none}
 .content.podium-only .podium-area{grid-column:2/4}
@@ -158,6 +158,7 @@ const kpis=[
  {label:"IN",value:"155,06",target:"150",state:"above",status:"↑ 103,4% da meta"},
  {label:"ICQA",value:"188,49",target:"200",state:"below",status:"↓ 94,2% da meta"}
 ];
+const processTargetKpi={"Expedição":"OUT","Shipping":"OUT","Open Transfer":"OUT","Put Away":"IN","Packing":"OUT","Picking":"OUT","Putwallin":"IN","ICQA":"ICQA"};
 const slides=[
  {label:"Expedição",icon:"🚚",rows:[
   {name:"THAIS MARIANA DA SILVA",rate:333.33},
@@ -247,10 +248,19 @@ function medalSvg(index){
  const labels=["ouro","prata","bronze"];
  return '<svg class="medal medal-'+classes[index]+'" viewBox="0 0 100 120" role="img" aria-label="Medalha de '+labels[index]+'"><path class="medal-ribbon" d="M25 4h23l-3 46-15-11-12 10zM52 4h23l7 45-16-10-13 11z"></path><circle class="medal-disc" cx="50" cy="78" r="29"></circle><circle class="medal-inner" cx="50" cy="78" r="21"></circle><path class="medal-star" d="m50 62 5 10 11 1.6-8 7.8 1.9 11L50 87.2l-9.9 5.2 1.9-11-8-7.8 11-1.6z"></path></svg>';
 }
-function podiumCard(person,index){
+function personRateClass(person,slide){
+ const targetKpi=kpis.find(function(item){return item.label===processTargetKpi[slide.label];});
+ if(!targetKpi||targetKpi.target===null)return "status-neutral";
+ return person.rate>=Number(targetKpi.target)?"status-good":"status-bad";
+}
+function personRateTitle(slide){
+ const targetKpi=kpis.find(function(item){return item.label===processTargetKpi[slide.label];});
+ return targetKpi&&targetKpi.target!==null?"Meta: "+targetKpi.target+" u/h":"Meta não disponível";
+}
+function podiumCard(person,index,slide){
  const rank=index+1;
  const rankText=["1º","2º","3º"];
- return '<article class="podium-item rank-'+rank+'"><div class="rank-block"><div class="podium-rank">'+rankText[index]+'</div>'+medalSvg(index)+'</div><div class="rep-label" title="'+person.name+'">'+person.name+'</div><div class="rep-value status-neutral">'+numberFormat.format(person.rate)+' u/h</div></article>';
+ return '<article class="podium-item rank-'+rank+'"><div class="rank-block"><div class="podium-rank">'+rankText[index]+'</div>'+medalSvg(index)+'</div><div class="rep-label" title="'+person.name+'">'+person.name+'</div><div class="rep-value '+personRateClass(person,slide)+'" title="'+personRateTitle(slide)+'">'+numberFormat.format(person.rate)+' u/h</div></article>';
 }
 function renderSlide(index){
  current=(index+visibleSlides.length)%visibleSlides.length;
@@ -273,13 +283,13 @@ function renderSlide(index){
   nextSection.hidden=true;
   nextList.innerHTML="";
  }else{
-  podium.innerHTML=top.map(podiumCard).join("");
+  podium.innerHTML=top.map(function(person,index){return podiumCard(person,index,slide);}).join("");
   nextSection.hidden=remaining.length===0;
   const maxRate=Math.max.apply(null,slide.rows.map(function(person){return person.rate;}));
   nextList.style.setProperty("--remaining-count",String(Math.max(1,remaining.length)));
   nextList.innerHTML=remaining.map(function(person,i){
    const width=Math.max(0,Math.min(100,person.rate/maxRate*100));
-   return '<div class="follow-row"><span class="position">'+String(i+4).padStart(2,"0")+'</span><span class="rep-label" title="'+person.name+'">'+person.name+'</span><div class="follow-track" aria-hidden="true"><span style="width:'+width.toFixed(1)+'%"></span></div><span class="rep-value status-neutral">'+numberFormat.format(person.rate)+' u/h</span></div>';
+   return '<div class="follow-row"><span class="position">'+String(i+4).padStart(2,"0")+'</span><span class="rep-label" title="'+person.name+'">'+person.name+'</span><div class="follow-track" aria-hidden="true"><span style="width:'+width.toFixed(1)+'%"></span></div><span class="rep-value '+personRateClass(person,slide)+'" title="'+personRateTitle(slide)+'">'+numberFormat.format(person.rate)+' u/h</span></div>';
   }).join("");
  }
 }
