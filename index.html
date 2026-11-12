@@ -156,7 +156,7 @@ const kpis=[
  {label:"GNP",value:"30,07",target:"30",state:"above",status:"↑ 100,2% da meta"},
  {label:"OUT",value:"42,32",target:"40",state:"above",status:"↑ 105,8% da meta"},
  {label:"IN",value:"155,06",target:"150",state:"above",status:"↑ 103,4% da meta"},
- {label:"ICQA",value:null,target:"200",state:"empty",status:"Sem dados de hoje"}
+ {label:"ICQA",value:"188,49",target:"200",state:"below",status:"↓ 94,2% da meta"}
 ];
 const slides=[
  {label:"Expedição",icon:"🚚",rows:[
@@ -212,7 +212,7 @@ const slides=[
   {name:"ERICA CRISTINA DA SILVA MENEGUELLO",rate:243.90},
   {name:"LUCIANA PEREIRA DE FARIAS",rate:65.79}
  ]},
- {label:"ICQA",icon:"🔎",rows:[]}
+ {label:"ICQA",icon:"🔎",rows:[{name:"TAMIRES DOMINGOS PEREIRA",rate:245.50},{name:"LUARA RAISSA RAMALHO",rate:150.02},{name:"LUCIENE DE JESUS PEIXOTO",rate:128.16}]}
 ];
 const processIcons={
  "Expedição":'<svg viewBox="0 0 64 64" aria-hidden="true"><path d="M6 21 26 10l20 11-20 11L6 21Z" fill="#FFF159" stroke="currentColor" stroke-width="3" stroke-linejoin="round"></path><path d="M6 21v25l20 11V32m0 25 20-11V21M36 14h16v24m0 0-7-7m7 7 7-7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path><path d="M16 41h7" stroke="#3483FA" stroke-width="3" stroke-linecap="round"></path></svg>',
@@ -224,7 +224,7 @@ const processIcons={
  "Putwallin":'<svg viewBox="0 0 64 64" aria-hidden="true"><rect x="8" y="8" width="48" height="48" rx="4" fill="#fff" stroke="currentColor" stroke-width="3"></rect><path d="M8 25h48M8 42h48M24 8v17m16 0v17m-16 0v14m16-14v14" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"></path><rect x="12" y="13" width="8" height="8" rx="1" fill="#FFF159"></rect><rect x="29" y="30" width="8" height="8" rx="1" fill="#FFF159"></rect><rect x="45" y="47" width="7" height="6" rx="1" fill="#FFF159"></rect><path d="M14 17h4m13 17h4m15 16h3" stroke="#3483FA" stroke-width="2" stroke-linecap="round"></path></svg>',
  "ICQA":'<svg viewBox="0 0 64 64" aria-hidden="true"><path d="M7 12h7l7 30h28l7-22H18" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path><path d="M23 21h27l-5 15H26z" fill="#FFF159" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"></path><circle cx="27" cy="51" r="4" fill="#FFF159" stroke="currentColor" stroke-width="3"></circle><circle cx="47" cy="51" r="4" fill="#FFF159" stroke="currentColor" stroke-width="3"></circle></svg>'
 };
-const captureLabel="12/11/2026, 10:42";
+const captureLabel="12/11/2026, 11:28";
 document.getElementById("updatedAt").textContent="Última atualização: "+captureLabel;
 const numberFormat=new Intl.NumberFormat("pt-BR",{minimumFractionDigits:2,maximumFractionDigits:2});
 const kpiRoot=document.getElementById("kpis");
