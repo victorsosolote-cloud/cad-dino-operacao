@@ -152,72 +152,8 @@ header:after{content:"";position:absolute;right:0;bottom:0;width:30%;height:2px;
   </div>
 </main>
 <script>
-const kpis=[
- {label:"GNP",value:"29,86",target:"30",state:"below",status:"↓ 99,5% da meta"},
- {label:"OUT",value:"42,99",target:"40",state:"above",status:"↑ 107,5% da meta"},
- {label:"IN",value:"156,30",target:"150",state:"above",status:"↑ 104,2% da meta"},
- {label:"ICQA",value:null,target:"200",state:"missing",status:"Sem dados de hoje"}
-];
-const slides=[
- {label:"Expedição",icon:"🚚",rows:[
-  {name:"THAINARA SANTIAGO LOPES",rate:454.54545454545456,target:null},
-  {name:"THAIS MARIANA DA SILVA",rate:333.33333333333337,target:null},
-  {name:"EVERTON DA SILVA ALVES",rate:264.70588235294116,target:null},
-  {name:"JANAINA FRANCO DE OLIVEIRA",rate:147.05882352941177,target:null}
- ]},
- {label:"Shipping",icon:"📦",rows:[
-  {name:"EVERTON DA SILVA ALVES",rate:820.1875344732488,target:583.47},
-  {name:"THAIS MARIANA DA SILVA",rate:766.2650602409639,target:583.47},
-  {name:"JANAINA FRANCO DE OLIVEIRA",rate:688.1303335919317,target:583.47},
-  {name:"THAINARA SANTIAGO LOPES",rate:665.1685393258426,target:583.47},
-  {name:"HELOISE OLIVEIRA MARQUES",rate:661.1570247933885,target:583.47},
-  {name:"MARIO FELIPE DOS SANTOS MELO",rate:609.6997690531178,target:583.47},
-  {name:"JOAO HENRIQUE TOLENTINO GIANVECHIO",rate:485.9154929577465,target:583.47}
- ]},
- {label:"Put Away",icon:"📥",rows:[
-  {name:"NATHAN DA SILVA LEDES DOS SANTOS",rate:398.05825242718447,target:231.68},
-  {name:"ANDREAS GUERT DE LIMA",rate:380.70404172099086,target:231.68},
-  {name:"STEFANY DE LOS ANGELES BRICENO",rate:363.8344226579521,target:231.68},
-  {name:"JONATHAN LUIS DOS SANTOS",rate:330.06535947712416,target:231.68},
-  {name:"GABRIELLY ISABEL SOARES PIRES",rate:288.135593220339,target:231.68},
-  {name:"GERALDO DIAS LIMA",rate:270.4301075268817,target:231.68},
-  {name:"ELIEZER RODRIGUES DOS SANTOS",rate:264.87523992322457,target:231.68},
-  {name:"MATEUS DE SOUZA PALMEIRA",rate:249.85706117781586,target:231.68},
-  {name:"ELAINE CRISTINA DOS SANTOS PEREIRA",rate:248.02527646129542,target:231.68},
-  {name:"JANAINA FRANCO DE OLIVEIRA",rate:245.24714828897336,target:231.68}
- ]},
- {label:"Packing",icon:"🧰",rows:[
-  {name:"ANGEL MOURA LEITE",rate:288.9060092449923,target:212.15},
-  {name:"LUCIANA PEREIRA DE FARIAS",rate:271.1246200607903,target:212.15},
-  {name:"KAROLAYNE DA SILVA FERREIRA",rate:244.9908925318761,target:212.15},
-  {name:"GABRIELE FERNANDES DE OLIVEIRA",rate:226.18687632295132,target:212.15},
-  {name:"ERICA CRISTINA DA SILVA MENEGUELLO",rate:225.22522522522522,target:212.15},
-  {name:"GABRIELA CABRAL DE ARAUJO",rate:224.9690976514215,target:212.15},
-  {name:"LUCIANA CRISTINA DE OLIVEIRA SANTOS",rate:218.82700837851158,target:212.15},
-  {name:"BRUNA RAFAELA DOS SANTOS",rate:216.02681291895186,target:212.15},
-  {name:"HELOISE OLIVEIRA MARQUES",rate:198.79518072289156,target:212.15},
-  {name:"ELIZANDRA ALINE FANTIN",rate:184.6231664137582,target:212.15}
- ]},
- {label:"Picking",icon:"🛒",rows:[
-  {name:"ERICA CRISTINA DA SILVA MENEGUELLO",rate:165.02033701336433,target:97.35},
-  {name:"STEFANY DE LOS ANGELES BRICENO",rate:145.50641940085592,target:97.35},
-  {name:"KAROLAYNE DA SILVA FERREIRA",rate:144.71780028943562,target:97.35},
-  {name:"ELAINE CRISTINA DOS SANTOS PEREIRA",rate:137.61467889908258,target:97.35},
-  {name:"LUCIANA CRISTINA DE OLIVEIRA SANTOS",rate:135.6749311294766,target:97.35},
-  {name:"JANAINA FRANCO DE OLIVEIRA",rate:125,target:97.35},
-  {name:"ANDREAS GUERT DE LIMA",rate:120.39957939011568,target:97.35},
-  {name:"LUCIANA PEREIRA DE FARIAS",rate:117.05685618729098,target:97.35},
-  {name:"VICTOR FERNANDO DE SOUZA MUNK",rate:115.2073732718894,target:97.35},
-  {name:"YASMIN THAYNARA MALAQUIAS DE OLIVEIRA",rate:113.71629542790153,target:97.35}
- ]},
- {label:"Putwallin",icon:"🧱",rows:[
-  {name:"ERICA CRISTINA DA SILVA MENEGUELLO",rate:368.2588597842835,target:298.34},
-  {name:"VICTOR FERNANDO DE SOUZA MUNK",rate:276.05386416861825,target:298.34},
-  {name:"LUCIANA PEREIRA DE FARIAS",rate:65.78947368421053,target:298.34}
- ]},
- {label:"Open Transfer",icon:"↗",rows:[]},
- {label:"ICQA",icon:"🔎",rows:[]}
-];
+const kpis=[{"label":"GNP","value":"28,94","target":"30","state":"below","status":"↓ 96,5% da meta"},{"label":"OUT","value":"42,19","target":"40","state":"above","status":"↑ 105,5% da meta"},{"label":"IN","value":"149,47","target":"150","state":"below","status":"↓ 99,6% da meta"},{"label":"ICQA","value":"236,34","target":"200","state":"above","status":"Média ponderada: 5 processos · 118,2% da meta"}];
+const slides=[{"label":"Expedição","icon":"🚚","metric":"units","rows":[{"ldap":"thainsantiag","name":"THAINARA SANTIAGO LOPES","units":20,"rate":452.8302,"target":null},{"ldap":"nikalmeida","name":"NIKOLAS BRYAN DE ALMEIDA","units":14,"rate":199.2095,"target":null},{"ldap":"everalves","name":"EVERTON DA SILVA ALVES","units":9,"rate":263.4146,"target":null},{"ldap":"thaismasilva","name":"THAIS MARIANA DA SILVA","units":6,"rate":342.8571,"target":null},{"ldap":"janfranco","name":"JANAINA FRANCO DE OLIVEIRA","units":5,"rate":147.541,"target":null}]},{"label":"Shipping","icon":"📦","rows":[{"ldap":"everalves","name":"EVERTON DA SILVA ALVES","units":1487,"rate":820.0368,"target":583.47},{"ldap":"thaismasilva","name":"THAIS MARIANA DA SILVA","units":1272,"rate":766.2651,"target":583.47},{"ldap":"janfranco","name":"JANAINA FRANCO DE OLIVEIRA","units":887,"rate":687.8931,"target":583.47},{"ldap":"thainsantiag","name":"THAINARA SANTIAGO LOPES","units":592,"rate":665.1685,"target":583.47},{"ldap":"heloiseomarq","name":"HELOISE OLIVEIRA MARQUES","units":80,"rate":660.5505,"target":583.47},{"ldap":"nikalmeida","name":"NIKOLAS BRYAN DE ALMEIDA","units":165,"rate":629.2373,"target":583.47},{"ldap":"mariomelo","name":"MARIO FELIPE DOS SANTOS MELO","units":792,"rate":609.8824,"target":583.47},{"ldap":"jgianvechio","name":"JOAO HENRIQUE TOLENTINO GIANVECHIO","units":211,"rate":471.5084,"target":583.47},{"ldap":"aulcoelho","name":"PAULO RICARDO COELHO DA SILVA","units":53,"rate":390.9836000000001,"target":583.47}]},{"label":"Put Away","icon":"📥","rows":[{"ldap":"nledes","name":"NATHAN DA SILVA LEDES DOS SANTOS","units":164,"rate":398.1119,"target":231.68},{"ldap":"andreasgulim","name":"ANDREAS GUERT DE LIMA","units":292,"rate":380.8696,"target":231.68000000000004},{"ldap":"stbriceno","name":"STEFANY DE LOS ANGELES BRICENO","units":668,"rate":363.8675,"target":231.67999999999998},{"ldap":"jonathanlusa","name":"JONATHAN LUIS DOS SANTOS","units":505,"rate":330.0654,"target":231.68},{"ldap":"gabriellyipi","name":"GABRIELLY ISABEL SOARES PIRES","units":51,"rate":287.3239,"target":231.68000000000004},{"ldap":"gerallima","name":"GERALDO DIAS LIMA","units":503,"rate":270.4705,"target":231.68},{"ldap":"eliezsantos","name":"ELIEZER RODRIGUES DOS SANTOS","units":138,"rate":264.96,"target":231.68},{"ldap":"mateussopalm","name":"MATEUS DE SOUZA PALMEIRA","units":437,"rate":249.8729,"target":231.68},{"ldap":"elainecrpere","name":"ELAINE CRISTINA DOS SANTOS PEREIRA","units":471,"rate":248.0761,"target":231.68},{"ldap":"janfranco","name":"JANAINA FRANCO DE OLIVEIRA","units":129,"rate":245.45449999999997,"target":231.68}]},{"label":"Packing","icon":"🧰","rows":[{"ldap":"angelmoleite","name":"ANGEL MOURA LEITE","units":750,"rate":288.8627,"target":212.15},{"ldap":"lucianfarias","name":"LUCIANA PEREIRA DE FARIAS","units":899,"rate":270.1052,"target":212.15000000000003},{"ldap":"karolaynferr","name":"KAROLAYNE DA SILVA FERREIRA","units":538,"rate":244.94750000000002,"target":212.15},{"ldap":"mayaramos","name":"MAYARA RAMOS","units":312,"rate":236.51299999999998,"target":212.14999999999998},{"ldap":"gabrielefoli","name":"GABRIELE FERNANDES DE OLIVEIRA","units":748,"rate":226.2097,"target":212.15},{"ldap":"emeneguello","name":"ERICA CRISTINA DA SILVA MENEGUELLO","units":325,"rate":225.25989999999996,"target":212.15},{"ldap":"gabrielacaar","name":"GABRIELA CABRAL DE ARAUJO","units":728,"rate":224.9614,"target":212.15},{"ldap":"maiarabarbos","name":"MAIARA DE JESUS BARBOSA","units":297,"rate":220.4991,"target":212.15000000000003},{"ldap":"lucianacrsan","name":"LUCIANA CRISTINA DE OLIVEIRA SANTOS","units":444,"rate":218.869,"target":212.15},{"ldap":"brrafaela","name":"BRUNA RAFAELA DOS SANTOS","units":709,"rate":216.0305,"target":212.15}]},{"label":"Picking","icon":"🛒","rows":[{"ldap":"wacorreia","name":"WAGNER LOPES CORREIA","units":267,"rate":193.9467,"target":97.35000000000001},{"ldap":"emeneguello","name":"ERICA CRISTINA DA SILVA MENEGUELLO","units":284,"rate":165.0363,"target":97.35},{"ldap":"stbriceno","name":"STEFANY DE LOS ANGELES BRICENO","units":204,"rate":145.5122,"target":97.35000000000001},{"ldap":"karolaynferr","name":"KAROLAYNE DA SILVA FERREIRA","units":100,"rate":144.7527,"target":97.34999999999998},{"ldap":"elainecrpere","name":"ELAINE CRISTINA DOS SANTOS PEREIRA","units":195,"rate":137.6201,"target":97.35},{"ldap":"lucianacrsan","name":"LUCIANA CRISTINA DE OLIVEIRA SANTOS","units":197,"rate":135.6542,"target":97.35},{"ldap":"fernanabreu","name":"FERNANDO AUGUSTO FELIX DE ABREU","units":164,"rate":128.3478,"target":97.35},{"ldap":"janfranco","name":"JANAINA FRANCO DE OLIVEIRA","units":62,"rate":125.1121,"target":97.35},{"ldap":"andreasgulim","name":"ANDREAS GUERT DE LIMA","units":229,"rate":120.4207,"target":97.35},{"ldap":"lucianfarias","name":"LUCIANA PEREIRA DE FARIAS","units":70,"rate":117.1548,"target":97.35}]},{"label":"Putwallin","icon":"🧱","rows":[{"ldap":"emeneguello","name":"ERICA CRISTINA DA SILVA MENEGUELLO","units":248,"rate":359.4203,"target":298.34},{"ldap":"vmunk","name":"VICTOR FERNANDO DE SOUZA MUNK","units":943,"rate":276.0449,"target":298.34},{"ldap":"banastacio","name":"BETANIA REGINA RODRIGUES ANASTACIO","units":243,"rate":209.68359999999998,"target":298.34},{"ldap":"lucianfarias","name":"LUCIANA PEREIRA DE FARIAS","units":5,"rate":66.1765,"target":298.34}]},{"label":"ICQA","icon":"🔎","rows":[{"ldap":"anapaulv","name":"ANA PAULA DOS SANTOS DA SILVA","units":284,"rate":320.8033,"target":391.47},{"ldap":"gangioni","name":"GISELE CRISTINA VASCONCERVA ANGIONI","units":147,"rate":306.6049,"target":391.4700000000001},{"ldap":"lucpeixoto","name":"LUCIENE DE JESUS PEIXOTO","units":695,"rate":294.42220772495017,"target":227.00414972260143},{"ldap":"aisvsilva","name":"THAIS VILHARBA SILVA GONCALVES","units":132,"rate":217.3833398759801,"target":317.9537289825431},{"ldap":"tamdomingos","name":"TAMIRES DOMINGOS PEREIRA","units":744,"rate":211.61406571176647,"target":184.50602153301563},{"ldap":"luramalho","name":"LUARA RAISSA RAMALHO","units":637,"rate":191.99596219649177,"target":168.7348693250255}]}];
 const visibleSlides=slides.filter(function(s){return s.label==="ICQA"||s.rows.length>0;});
 const processIcons={
  "Expedição":'<svg viewBox="0 0 64 64" aria-hidden="true"><path d="M6 21 26 10l20 11-20 11L6 21Z" fill="#FFF159" stroke="currentColor" stroke-width="3" stroke-linejoin="round"></path><path d="M6 21v25l20 11V32m0 25 20-11V21M36 14h16v24m0 0-7-7m7 7 7-7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path><path d="M16 41h7" stroke="#3483FA" stroke-width="3" stroke-linecap="round"></path></svg>',
@@ -229,9 +165,10 @@ const processIcons={
  "Putwallin":'<svg viewBox="0 0 64 64" aria-hidden="true"><rect x="8" y="8" width="48" height="48" rx="4" fill="#fff" stroke="currentColor" stroke-width="3"></rect><path d="M8 25h48M8 42h48M24 8v17m16 0v17m-16 0v14m16-14v14" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"></path><rect x="12" y="13" width="8" height="8" rx="1" fill="#FFF159"></rect><rect x="29" y="30" width="8" height="8" rx="1" fill="#FFF159"></rect><rect x="45" y="47" width="7" height="6" rx="1" fill="#FFF159"></rect><path d="M14 17h4m13 17h4m15 16h3" stroke="#3483FA" stroke-width="2" stroke-linecap="round"></path></svg>',
  "ICQA":'<svg viewBox="0 0 64 64" aria-hidden="true"><path d="M7 12h7l7 30h28l7-22H18" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path><path d="M23 21h27l-5 15H26z" fill="#FFF159" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"></path><circle cx="27" cy="51" r="4" fill="#FFF159" stroke="currentColor" stroke-width="3"></circle><circle cx="47" cy="51" r="4" fill="#FFF159" stroke="currentColor" stroke-width="3"></circle></svg>'
 };
-const captureLabel="12/11/2026, 12:04";
+const captureLabel="12/11/2026, 14:11";
 document.getElementById("updatedAt").textContent="Última atualização: "+captureLabel;
 const numberFormat=new Intl.NumberFormat("pt-BR",{minimumFractionDigits:2,maximumFractionDigits:2});
+const unitsFormat=new Intl.NumberFormat("pt-BR",{maximumFractionDigits:0});
 const kpiRoot=document.getElementById("kpis");
 kpiRoot.innerHTML=kpis.map(function(item){
  const level=item.state==="above"?"status-good":item.state==="below"?"status-bad":"missing";
@@ -251,17 +188,29 @@ function medalSvg(index){
  const labels=["ouro","prata","bronze"];
  return '<svg class="medal medal-'+classes[index]+'" viewBox="0 0 100 120" role="img" aria-label="Medalha de '+labels[index]+'"><path class="medal-ribbon" d="M25 4h23l-3 46-15-11-12 10zM52 4h23l7 45-16-10-13 11z"></path><circle class="medal-disc" cx="50" cy="78" r="29"></circle><circle class="medal-inner" cx="50" cy="78" r="21"></circle><path class="medal-star" d="m50 62 5 10 11 1.6-8 7.8 1.9 11L50 87.2l-9.9 5.2 1.9-11-8-7.8 11-1.6z"></path></svg>';
 }
-function personRateClass(person){
+function slideValue(person,slide){
+ return slide.metric==="units"?Number(person.units)||0:Number(person.rate)||0;
+}
+function slideUnit(slide){
+ return slide.metric==="units"?" un.":" u/h";
+}
+function slideFormat(value,slide){
+ return slide.metric==="units"?unitsFormat.format(value):numberFormat.format(value);
+}
+function personRateClass(person,slide){
+ if(slide.metric==="units")return "status-neutral";
  if(person.target===null||person.target===undefined)return "status-neutral";
  return person.rate>=Number(person.target)?"status-good":"status-bad";
 }
-function personRateTitle(person){
+function personRateTitle(person,slide){
+ if(slide.metric==="units")return "Total de unidades processadas";
  return person.target===null||person.target===undefined?"Meta não disponível":"Meta: "+numberFormat.format(person.target)+" u/h";
 }
 function podiumCard(person,index,slide){
  const rank=index+1;
  const rankText=["1º","2º","3º"];
- return '<article class="podium-item rank-'+rank+'"><div class="rank-block"><div class="podium-rank">'+rankText[index]+'</div>'+medalSvg(index)+'</div><div class="rep-label" title="'+person.name+'">'+person.name+'</div><div class="rep-value '+personRateClass(person)+'" title="'+personRateTitle(person)+'">'+numberFormat.format(person.rate)+' u/h</div></article>';
+ const value=slideValue(person,slide);
+ return '<article class="podium-item rank-'+rank+'"><div class="rank-block"><div class="podium-rank">'+rankText[index]+'</div>'+medalSvg(index)+'</div><div class="rep-label" title="'+person.name+'">'+person.name+'</div><div class="rep-value '+personRateClass(person,slide)+'" title="'+personRateTitle(person,slide)+'">'+slideFormat(value,slide)+slideUnit(slide)+'</div></article>';
 }
 function renderSlide(index){
  current=(index+visibleSlides.length)%visibleSlides.length;
@@ -286,11 +235,12 @@ function renderSlide(index){
  }else{
   podium.innerHTML=top.map(function(person,index){return podiumCard(person,index,slide);}).join("");
   nextSection.hidden=remaining.length===0;
-  const maxRate=Math.max.apply(null,slide.rows.map(function(person){return person.rate;}));
+  const maxValue=Math.max.apply(null,slide.rows.map(function(person){return slideValue(person,slide);}));
   nextList.style.setProperty("--remaining-count",String(Math.max(1,remaining.length)));
   nextList.innerHTML=remaining.map(function(person,i){
-   const width=Math.max(0,Math.min(100,person.rate/maxRate*100));
-   return '<div class="follow-row"><span class="position">'+String(i+4).padStart(2,"0")+'</span><span class="rep-label" title="'+person.name+'">'+person.name+'</span><div class="follow-track" aria-hidden="true"><span style="width:'+width.toFixed(1)+'%"></span></div><span class="rep-value '+personRateClass(person)+'" title="'+personRateTitle(person)+'">'+numberFormat.format(person.rate)+' u/h</span></div>';
+   const value=slideValue(person,slide);
+   const width=maxValue>0?Math.max(0,Math.min(100,value/maxValue*100)):0;
+   return '<div class="follow-row"><span class="position">'+String(i+4).padStart(2,"0")+'</span><span class="rep-label" title="'+person.name+'">'+person.name+'</span><div class="follow-track" aria-hidden="true"><span style="width:'+width.toFixed(1)+'%"></span></div><span class="rep-value '+personRateClass(person,slide)+'" title="'+personRateTitle(person,slide)+'">'+slideFormat(value,slide)+slideUnit(slide)+'</span></div>';
   }).join("");
  }
 }
