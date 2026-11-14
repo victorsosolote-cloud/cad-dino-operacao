@@ -123,7 +123,7 @@ header:before{content:"";position:absolute;inset:0;z-index:1;background:linear-g
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
 
 /* TV layout: compact KPI/header rows, larger podium and readable next-seven list. */
-@media (min-width: 1200px) and (min-height: 720px) {
+@media (min-width: 1001px) and (min-height: 720px) {
   body { gap: .55vh; padding: 0 1vw .75vh; }
   .summary { min-height: 10vh; gap: clamp(8px, .65vw, 14px); }
   .metric { min-height: 0; padding: .55vh .7vw; border-top-width: 2px; border-radius: 9px; }
@@ -172,8 +172,9 @@ header:before{content:"";position:absolute;inset:0;z-index:1;background:linear-g
   .follow-row .rep-label { font-size: clamp(18px, 1.35vw, 27px); line-height: 1.08; }
   .follow-row .rep-value { font-size: clamp(17px, 1.28vw, 25px); }
   .follow-track { height: clamp(8px, .85vh, 13px); }
+  .content.podium-only .podium[data-count="1"] { width: min(100%, 1100px); }
+  .content.podium-only .podium[data-count="2"] { width: min(100%, 1250px); }
 }
-
 </style>
 </head>
 <body>
