@@ -10,14 +10,15 @@
 *{box-sizing:border-box}
 html,body{height:100%;margin:0;overflow:hidden;background:linear-gradient(#eef2f6,#f7f9fc);color:var(--ink);font-family:"Proxima Nova",Arial,Helvetica,sans-serif;-webkit-font-smoothing:antialiased}
 body{height:100vh;display:grid;grid-template-rows:auto auto auto minmax(0,1fr);gap:1.05vh;padding:0 1.35vw 1.2vh}
-header{position:relative;isolation:isolate;overflow:hidden;display:flex;align-items:center;justify-content:space-between;min-height:clamp(82px,10vh,128px);margin:0 -1.35vw;padding:0 1.6vw;background-color:#173f2d;background-image:linear-gradient(90deg,#143925f5 0%,#173f2dd1 20%,#173f2d45 48%,#173f2d35 76%,#123927e8 100%),url("assets/cad-dino-trex-header.png");background-repeat:no-repeat,no-repeat;background-position:center,60% 25%;background-size:cover,cover;border-bottom:4px solid #fff159;box-shadow:0 5px 16px #101e4033}
-header:after{content:"";position:absolute;right:0;bottom:0;width:34%;height:2px;background:linear-gradient(90deg,transparent,#fff159,transparent);pointer-events:none}
-.brand-lockup{display:flex;align-items:center;gap:.58vw;min-width:0;position:relative;z-index:1}
+header{position:relative;isolation:isolate;overflow:hidden;display:flex;align-items:center;justify-content:space-between;min-height:clamp(82px,10vh,128px);margin:0 -1.35vw;padding:0 1.6vw;background:#173f2d;border-bottom:4px solid #fff159;box-shadow:0 5px 16px #101e4033}
+header:before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(20,57,37,.94) 0%,rgba(23,63,45,.76) 24%,rgba(23,63,45,.16) 51%,rgba(23,63,45,.28) 75%,rgba(18,57,39,.9) 100%);pointer-events:none}header:after{content:"";position:absolute;z-index:3;right:0;bottom:0;width:34%;height:2px;background:linear-gradient(90deg,transparent,#fff159,transparent);pointer-events:none}
+.header-art{position:absolute;z-index:0;top:-15%;right:4%;width:74%;height:130%;object-fit:cover;object-position:60% 25%;opacity:.95;pointer-events:none;user-select:none}
+.brand-lockup{display:flex;align-items:center;gap:.58vw;min-width:0;position:relative;z-index:2}
 .dino-badge{width:clamp(38px,3vw,54px);height:clamp(38px,3vw,54px);display:grid;place-items:center;flex:0 0 auto;border:2px solid #fff159;border-radius:15px;background:linear-gradient(145deg,#fff,#eff8e7);box-shadow:0 3px 10px #071d1238}
 .dino-badge svg{width:90%;height:90%;filter:drop-shadow(0 1px 1px #102e1e40)}
 .brand{font-size:clamp(25px,2vw,42px);font-weight:950;line-height:1;letter-spacing:.045em;color:#fff}
 .brand span{color:#fff159;text-shadow:0 2px 0 #163d2c}
-.timestamp{position:relative;z-index:1;flex:0 0 auto;max-width:48vw;padding:.45vh .82vw;border:1px solid #fff159;border-radius:999px;background:#fffdf0;color:#183c2b;font-size:clamp(11px,.85vw,18px);line-height:1.2;font-weight:850;text-align:right;white-space:nowrap;box-shadow:0 3px 8px #0d261a38}
+.timestamp{position:relative;z-index:2;flex:0 0 auto;max-width:48vw;padding:.45vh .82vw;border:1px solid #fff159;border-radius:999px;background:#fffdf0;color:#183c2b;font-size:clamp(11px,.85vw,18px);line-height:1.2;font-weight:850;text-align:right;white-space:nowrap;box-shadow:0 3px 8px #0d261a38}
 .slide-head{display:flex;align-items:center;justify-content:flex-end;min-height:4.5vh;padding:0 .2vw}
 .slide-nav{display:flex;align-items:center;gap:clamp(8px,.75vw,14px)}
 .nav-button{width:clamp(34px,2.8vw,52px);height:clamp(34px,2.8vw,52px);display:grid;place-items:center;border:0;border-radius:9px;background:#191919;color:#fff;font:900 clamp(20px,1.6vw,30px)/1 Arial,sans-serif;cursor:pointer;box-shadow:0 3px 8px #101e402e;transition:transform .18s,background .18s}
@@ -124,6 +125,7 @@ header:after{content:"";position:absolute;right:0;bottom:0;width:34%;height:2px;
 </head>
 <body>
 <header>
+  <img class="header-art" src="assets/cad-dino-trex-header.png" alt="" aria-hidden="true">
   <div class="brand-lockup">
     <div class="dino-badge" aria-hidden="true"><svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 37 5 32l13-2 6-10 9-4 9 4 6-3 9 5 2 7 5 4-5 6-10 1-5 8-8 1-2-7-8-2-4 5h-8l2-9-8 1Z" fill="#28734C" stroke="#174A33" stroke-width="2.5" stroke-linejoin="round"></path><path d="m20 22 3-9 5 7 5-11 5 11 7-5 1 10" fill="#FFF159" stroke="#174A33" stroke-width="2.4" stroke-linejoin="round"></path><path d="m8 37 9 4 2-5m11 9 3 9m9-8-1 8m6-31 7 2 4 4-6 3-6-2" fill="none" stroke="#174A33" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path><circle cx="47" cy="25" r="2" fill="#FFF9D8" stroke="#174A33" stroke-width="1.5"></circle><path d="m51 32 4 1-2 2" fill="none" stroke="#FFF9D8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
     <div class="brand">CAD <span>DINO</span></div>
